@@ -1,4 +1,4 @@
-rgdeg - A collection of graph algorithms for Ruby
+rgdeg - a collection of graph algorithms for Ruby
 ====
 
 This is a collection of graph algorithms for Ruby.
