@@ -47,15 +47,15 @@ module Rgdeg
   # Some people like the recursive version better.
   def depth_first_search_rec(graph, start)
     visited = Set.new
-    core = lambda do |nodes|
+    search = lambda do |nodes|
       nodes.each do |node|
         return if visited.include?(node)
         visited << node
         yield node
-        core.call(graph.fetch(node))
+        search.call(graph.fetch(node))
       end
     end
-    core.call([start])
+    search.call([start])
     nil
   end
 end
