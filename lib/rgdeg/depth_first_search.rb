@@ -10,6 +10,10 @@ module Rgdeg
   # If your graph doesn't have cycles (DAG), this is probably still a good idea
   # because it could save time.
   #
+  # The graph should be a hash whose keys are nodes and whose values are arrays
+  # of directly reachable nodes.  There should be a key in the hash for every
+  # node.
+  #
   # Easy modifications
   # ====
   #
