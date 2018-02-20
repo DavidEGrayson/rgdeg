@@ -60,8 +60,8 @@ module Rgdeg
   end
 
   # Just like depth_first_search but does not yield the starting elemenet
-  # automatically; only yields if there are edges (a cycle) in the graph leading
-  # from the starting element to itself.
+  # automatically; only yields it if there are edges (a cycle) in the graph
+  # leading from the starting element to itself.
   #
   # Used in transitive_closure.
   def depth_first_search_exclude_start(graph, start)
