@@ -58,4 +58,26 @@ module Rgdeg
     search.call([start])
     nil
   end
+
+  # Just like depth_first_search but does not yield the starting elemenet
+  # automatically; only yields if there are edges (a cycle) in the graph leading
+  # from the starting element to itself.
+  #
+  # Used in transitive_closure.
+  def depth_first_search_exclude_start(graph, start)
+    stack = [graph.fetch(start).to_enum]
+    visited = Set.new
+    until stack.empty?
+      begin
+        node = stack.last.next
+      rescue StopIteration
+        stack.pop
+        next
+      end
+      next if visited.include?(node)
+      visited << node
+      stack << graph.fetch(node).to_enum
+      yield node
+    end
+  end
 end
