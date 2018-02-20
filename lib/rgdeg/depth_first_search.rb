@@ -15,8 +15,8 @@ module Rgdeg
   #
   # Multiple starting points: If you want this routine to either accept a single
   # node as its starting point or accept an array of nodes as a starting point,
-  # change "[start]" to "Array(start)" in the first line.  We can't do that in
-  # the main version because it breaks applications that use arrays as nodes.
+  # change "[start]" to "Array(start)".  We can't do that in the main version
+  # because it breaks applications that use arrays as nodes.
   #
   # Multiple visits: If you don't care about the same node being searched
   # multiple times, just remove the three lines of code that refer to 'visited'.
@@ -42,5 +42,20 @@ module Rgdeg
       stack << graph.fetch(node).to_enum
       yield node
     end
+  end
+
+  # Some people like the recursive version better.
+  def depth_first_search_rec(graph, start)
+    visited = Set.new
+    core = lambda do |nodes|
+      nodes.each do |node|
+        return if visited.include?(node)
+        visited << node
+        yield node
+        core.call(graph.fetch(node))
+      end
+    end
+    core.call([start])
+    nil
   end
 end
