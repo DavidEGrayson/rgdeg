@@ -10,7 +10,7 @@ shared_examples_for 'depth first search routines' do |routine|
   end
 
   it 'does not search the same node twice' do
-    graph = { 1 => [2, 3], 2 => [4], 3 => [4], 4 => [5], 5 => [] }
+    graph = { 1 => [2, 4, 3], 2 => [4], 3 => [4], 4 => [5], 5 => [] }
     nodes = enum_for(routine, graph, 1).to_a
     expect(nodes).to eq [1, 2, 4, 5, 3]
   end

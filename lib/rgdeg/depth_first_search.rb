@@ -49,7 +49,7 @@ module Rgdeg
     visited = Set.new
     search = lambda do |nodes|
       nodes.each do |node|
-        return if visited.include?(node)
+        next if visited.include?(node)
         visited << node
         yield node
         search.call(graph.fetch(node))
