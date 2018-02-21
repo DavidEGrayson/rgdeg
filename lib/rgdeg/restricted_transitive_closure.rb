@@ -7,7 +7,7 @@ module Rgdeg
   # the set of allowed nodes, and that has an edge from node X to node Y if and
   # only if Y was reachable from X in the old graph.
   #
-  # It is OK is the allowed array/set contains nodes that aren't in the graph at
+  # It is OK if the allowed array/set contains nodes that aren't in the graph at
   # all.
   #
   # The input graph should be a hash whose keys are nodes and whose values are
