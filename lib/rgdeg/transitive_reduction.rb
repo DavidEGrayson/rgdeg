@@ -28,7 +28,7 @@ module Rgdeg
         nodes = follow_one_edge_for_set_of_nodes.(nodes)
         distance += 1
         nodes_with_max_distance_1 -= nodes
-        if distance >= graph.size
+        if distance > graph.size
           raise "Cycle detected: this algorithm only works with DAGs."
         end
       end
