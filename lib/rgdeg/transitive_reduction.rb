@@ -14,8 +14,8 @@ module Rgdeg
       distance = 1
       until nodes.empty?
         nodes = Set.new nodes.flat_map &graph.method(:fetch)
-        distance += 1
         nodes_with_max_distance_1 -= nodes
+        distance += 1
         if distance > graph.size
           raise "Cycle detected: this algorithm only works with DAGs."
         end
