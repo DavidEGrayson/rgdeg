@@ -8,8 +8,8 @@ module Rgdeg
   # This algorithm only works with DAGs.  It will detect cycles and raise an
   # exception.
   def transitive_reduction(graph)
-    # Given a set of nodes, returns the set of nodes that can be reached from
-    # those nodes by following one edge.
+    # Given a set or array of nodes, returns the set of nodes that can be
+    # reached from those nodes by following one edge.
     follow_one_edge_for_set_of_nodes = lambda do |nodes|
       new_nodes = Set.new
       nodes.each do |node|
@@ -22,19 +22,13 @@ module Rgdeg
 
     tr = {}
     graph.each_key do |start_node|
-      distance = 0
-      nodes = Set.new([start_node])
-      nodes_with_max_distance_1 = nil
+      nodes = follow_one_edge_for_set_of_nodes.([start_node])
+      nodes_with_max_distance_1 = nodes
+      distance = 1
       while nodes.size > 0
         nodes = follow_one_edge_for_set_of_nodes.(nodes)
         distance += 1
-
-        if distance == 1
-          nodes_with_max_distance_1 = nodes
-        else
-          nodes_with_max_distance_1 -= nodes
-        end
-
+        nodes_with_max_distance_1 -= nodes
         if distance >= graph.size
           raise "Cycle detected: this algorithm only works with DAGs."
         end
