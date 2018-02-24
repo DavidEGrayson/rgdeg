@@ -21,11 +21,10 @@ module Rgdeg
     end
 
     tr = {}
-    graph.each_key do |start_node|
-      nodes = follow_one_edge_for_set_of_nodes.([start_node])
-      nodes_with_max_distance_1 = nodes
+    graph.each do |start_node, nodes|
+      nodes_with_max_distance_1 = Set.new(nodes)
       distance = 1
-      while nodes.size > 0
+      until nodes.empty?
         nodes = follow_one_edge_for_set_of_nodes.(nodes)
         distance += 1
         nodes_with_max_distance_1 -= nodes
