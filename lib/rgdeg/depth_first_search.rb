@@ -32,18 +32,17 @@ module Rgdeg
   #   enum_for(:breadth_first_search_dag, graph, start).to_a
   #
   def depth_first_search(graph, start)
-    stack = [[start].to_enum]
+    stack = [[start]]
     visited = Set.new
     until stack.empty?
-      begin
-        node = stack.last.next
-      rescue StopIteration
+      node = stack.last.pop
+      if node.nil?
         stack.pop
         next
       end
       next if visited.include?(node)
       visited << node
-      stack << graph.fetch(node).to_enum
+      stack << graph.fetch(node).to_a.reverse
       yield node
     end
   end
@@ -69,18 +68,17 @@ module Rgdeg
   #
   # Used in transitive_closure.
   def depth_first_search_exclude_start(graph, start)
-    stack = [graph.fetch(start).to_enum]
+    stack = [graph.fetch(start).to_a.reverse]
     visited = Set.new
     until stack.empty?
-      begin
-        node = stack.last.next
-      rescue StopIteration
+      node = stack.last.pop
+      if node.nil?
         stack.pop
         next
       end
       next if visited.include?(node)
       visited << node
-      stack << graph.fetch(node).to_enum
+      stack << graph.fetch(node).to_a.reverse
       yield node
     end
   end
